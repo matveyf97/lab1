@@ -1,7 +1,16 @@
 #include <iostream>
+#include <string>
+
+struct Pipe{
+    string name;
+    double length = 0;
+    double diameter = 0;
+    bool inRepair = false;
+};
 
 using namespace std;
 int main(){
+    Pipe pipe
     int choice = 00 ;
     do {
         cout << "1. Добавить трубу\n2. Добавить КС\n3. Посмотреть объекты\n4. Редактировать трубу\n5. Редактировать КС\n6. Сохранить\n7. Загрузить\n0. Выйти\n";

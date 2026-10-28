@@ -15,7 +15,13 @@ bool readInt(int& value){
         istringstream input(line);
         int number;
         char extra;
-        
+        if((input >> number) && !(input >> extra)){
+            value = number;
+            return true;
+        }
+        else{
+            cout << "введите целое число";
+        }
     }
     
 }

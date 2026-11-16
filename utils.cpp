@@ -25,3 +25,24 @@ bool readInt(int& value){
     }
     
 }
+
+bool readDouble(double& value){
+    while (true)
+    {
+        string line;
+        if (!getline(cin, line)){
+            return false;
+        }
+        istringstream input(line);
+        double number;
+        char extra;
+        if((input >> number) && !(input >> extra)){
+            value = number;
+            return true;
+        }
+        else{
+            cout << "введите число";
+        }
+    }
+    
+}

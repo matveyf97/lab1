@@ -9,6 +9,6 @@ struct Pipe{
     bool inRepair = false;
 };
 
-void readPipe(Pipe& pipe);
+bool readPipe(Pipe& pipe);
 
     

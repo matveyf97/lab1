@@ -20,17 +20,29 @@ int main(){
         }
         switch (choice) {
             case 1:
-                cout << "добавление трубы\n";
-                readPipe (pipe);
+                if (!pipe.name.empty()) {
+                    cout << "труба уже добавлена\n";
+                } else if (!readPipe(pipe)) {
+                    return 0;
+                }
                 break;
             case 2:
                 cout << "добавление КС\n";
                 break;
             case 3:
-                cout << "просмотр объектов\n";
+                if (pipe.name.empty()){
+                    cout << "труба еще не добавлена\n";
+                }
+                else {
+                    showPipe(pipe);
+                }
                 break;
             case 4:
-                cout << "редактирование трубы\n";
+                if (pipe.name.empty()) {
+                    cout << "сначала добавьте трубу\n";
+                } else if (!editPipe(pipe)) {
+                    return 0;
+                }
                 break;
             case 5:
                 cout << "редактирование КС\n";

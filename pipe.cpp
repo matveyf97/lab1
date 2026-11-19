@@ -5,39 +5,46 @@
 using namespace std;
 
 bool readPipe(Pipe& pipe){
+        Pipe newPipe;
         cout << "введите название трубы\n";
-        if (!getline(cin >> ws, pipe.name)){
+        if (!readName(newPipe.name)){
             return false;
         };
-        cout << "введите длину трубы\n";
-        if (!readDouble(pipe.length)){
-            return false;   
-        }
-        while (pipe.length <= 0){
-            cout << "длина трубы должна быть положительным числом и больше 0\n";
-            if (!readDouble(pipe.length)){
-                return false; 
-            }
-        }
-        cout << "введите диаметр трубы\n";
-        if (!readDouble(pipe.diameter)){
-            return false;   
-        }
-                while (pipe.diameter <= 0){
-            cout << "диаметр трубы должна быть положительным числом и больше 0\n";
-            if (!readDouble(pipe.diameter)){
-                return false; 
-            }
-        }
-        int orz = -1;
-        while (orz != 1 && orz != 0){
-            cout << "введите состояние трубы\n1 - труба в ремонте\n0 - труба работает\n";
-            if (!readInt(orz)){
+        do{
+            cout << "введите длину трубы в км больше 0\n";
+            if (!readDouble(newPipe.length)){
                 return false;
             }
+        } while (newPipe.length <= 0 );
+        do{
+            cout << "введите диаметр трубы в мм больше 0\n";
+            if (!readDouble(newPipe.diameter)){
+                return false;
+            }
+        } while (newPipe.diameter <= 0 );
+        if (!editPipe(newPipe)){
+            return false;
         }
-        pipe.inRepair = (orz == 1);
+        pipe = newPipe;
         return true;
-        
+    }
+
+void showPipe(const Pipe& pipe) {
+    cout << "труба: " << pipe.name << '\n'
+         << "длина: " << pipe.length << " км\n"
+         << "диаметр: " << pipe.diameter << " мм\n"
+         << "состояние: " << (pipe.inRepair ? "в ремонте" : "работает") << '\n';
+}
+
+bool editPipe(Pipe& pipe){
+    int repair;
+    do {
+        cout << "1 - труба в ремонте, 0 - труба работает\n";
+        if (!readInt(repair)) {
+            return false;
         }
-    
+    } while (repair != 0 && repair != 1);
+    pipe.inRepair = (repair == 1);
+    return true;
+
+}

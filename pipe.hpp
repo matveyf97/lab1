@@ -10,5 +10,8 @@ struct Pipe{
 };
 
 bool readPipe(Pipe& pipe);
+void showPipe(const Pipe& pipe);
+bool editPipe(Pipe& pipe);
+
 
     

@@ -3,7 +3,7 @@
 #include <sstream>
 #include "pipe.hpp"
 #include "utils.hpp"
-
+#include "station.hpp"
 using namespace std;
 
 
@@ -11,7 +11,7 @@ using namespace std;
 
 int main(){
     Pipe pipe;
-
+    Station station;
     int choice = 0 ;
     do {
         cout << "1. Добавить трубу\n2. Добавить КС\n3. Посмотреть объекты\n4. Редактировать трубу\n5. Редактировать КС\n6. Сохранить\n7. Загрузить\n0. Выйти\n";
@@ -27,14 +27,22 @@ int main(){
                 }
                 break;
             case 2:
-                cout << "добавление КС\n";
-                break;
+                if (!station.name.empty()) {
+                    cout << "КС уже добавлена\n";
+                } else if (!readStation(station)){
+                    return 0;
+                }
             case 3:
                 if (pipe.name.empty()){
                     cout << "труба еще не добавлена\n";
                 }
                 else {
                     showPipe(pipe);
+                }
+                if(station.name.empty()){
+                    cout << "КС еще не добавлена\n";
+                }else{
+                    showStation(station);
                 }
                 break;
             case 4:
@@ -45,7 +53,11 @@ int main(){
                 }
                 break;
             case 5:
-                cout << "редактирование КС\n";
+                if(station.name.empty()){
+                    cout << "КС еще не добавлена\n";
+                }else if (!editStation(station)) { 
+                    return 0;
+                }
                 break;
             case 6:
                 cout << "сохранение\n";
